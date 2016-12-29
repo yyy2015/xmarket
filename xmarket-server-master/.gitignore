@@ -1,0 +1,11 @@
+.gradle
+build/
+!gradle-wrapper.jar
+/.idea/
+*.iws
+/out/
+.idea_modules/
+*.class
+hs_err_pid*
+
+xmarket-server-admin-ui/node_modules/

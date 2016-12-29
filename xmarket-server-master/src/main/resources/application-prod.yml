@@ -1,0 +1,41 @@
+server:
+    port: 80
+    compression:
+        min-response-size: 512
+        enabled: true
+        mime-types: text/html,text/css,text/javascript,application/javascript,image/gif,image/png,image/jpg,application/javascript
+    undertow:
+        io-threads: 4
+        worker-threads: 10
+        buffer-size: 16384
+        accesslog:
+            enabled: true
+            dir: D:\github_repository\xmarket-server-master\log\server_log
+            pattern: combined
+    ssl:
+        key-store: classpath:xmarket.keystore
+        key-store-password: 546sdhjdf
+        key-password: sdjkasl465sd
+        keyAlias: xmarketkey
+        enabled: false
+logging:
+    config: classpath:logback-spring.xml
+    path: D:\github_repository\xmarket-server-master\log\spring_log
+spring:
+    http:
+        encoding.charset: UTF-8
+        encoding.force: false
+        multipart:
+          max-file-size: 3MB
+          max-request-size: 25MB
+    data:
+        mongodb:
+            database: xmarket
+            host: 127.0.0.1
+            port: 27017
+xmarket:
+    pic_home: D:\github_repository\xmarket-server-master\picture
+    address: https://127.0.0.1:80/
+    jwt:
+        key: shaku$#&!><?SD*o349()?/,<>+
+        life: 7200000
