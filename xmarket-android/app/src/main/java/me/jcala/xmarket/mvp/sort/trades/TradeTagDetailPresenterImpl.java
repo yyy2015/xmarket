@@ -30,7 +30,7 @@ public class TradeTagDetailPresenterImpl implements TradeTagDetailPresenter,Trad
 
     @Override
     public void getTradeListByTag(String tagName) {
-        model.executeTagTradesReq(this,tagName,1);
+        model.executeTagTradesReq(this,tagName,0);
     }
 
     @Override
