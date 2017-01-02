@@ -68,9 +68,9 @@ public class TradeAddPresenterImpl
                              EditText price, EditText desc, TextView tag) {
         Trade trade=checkForm(picUploadUrls,title,price,desc,tag);
 
-        if (!trade.isReleaseCheck()){
-            return;
-        }
+//        if (!trade.isReleaseCheck()){
+//            return;
+//        }
         trade.setStatus(0);//状态,0代表商品待售
         trade.setCreateTime(System.currentTimeMillis());//设置商品发布时间
         view.whenStartProgress();
@@ -83,7 +83,7 @@ public class TradeAddPresenterImpl
 
     private Trade checkForm(List<String> picUploadUrls, EditText title, EditText price, EditText desc, TextView tag){
         Trade trade=new Trade();
-        trade.setReleaseCheck(false);
+        //trade.setReleaseCheck(false);
         if (picUploadUrls.size() < 1){
             view.whenFail("请选择至少一张配图");
             return trade;
@@ -124,7 +124,7 @@ public class TradeAddPresenterImpl
         author.setAvatarUrl(authorOld.getAvatarUrl());
         trade.setSchoolName(authorOld.getSchool());
         trade.setAuthor(author);
-        trade.setReleaseCheck(true);
+        //trade.setReleaseCheck(true);
         return trade;
     }
 }
