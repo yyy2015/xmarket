@@ -35,7 +35,7 @@ spring:
             port: 27017
 xmarket:
     pic_home: D:\github_repository\xmarket-server-master\picture
-    address: http://172.19.186.78:80/
+    address: http://192.168.31.202:80/
     jwt:
         key: shaku$#&!><?SD*o349()?/,<>+
         life: 7200000

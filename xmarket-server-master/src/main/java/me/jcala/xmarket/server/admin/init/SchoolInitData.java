@@ -15,11 +15,10 @@ public class SchoolInitData {
     }
 
     private void addSchool(){
-        schoolList.add("西南交通大学(犀浦校区)");
-        schoolList.add("西南交通大学(九里校区)");
-        schoolList.add("西南交通大学(峨眉校区)");
-        schoolList.add("电子科技大学(沙河校区)");
-        schoolList.add("电子科技大学(清水河校区)");
+        schoolList.add("南京大学");
+        schoolList.add("东南大学");
+        schoolList.add("南京师范大学");
+        schoolList.add("南京工业大学");
     }
 
     public List<String> getSchoolList(){

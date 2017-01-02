@@ -19,10 +19,10 @@ public class WebMavConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tokenInterceptor)
-                .addPathPatterns("/api/v1/users/**")//拦截所有用户路径
-                .addPathPatterns("/api/v1/deals/**")//拦截所有交易路径
-                .addPathPatterns("/api/v1/trades/**");//拦截所有商品路径
-                //.excludePathPatterns("/api/v1/users/register");//排除注册路径
+//        registry.addInterceptor(tokenInterceptor)
+//                .addPathPatterns("/api/v1/users/**")//拦截所有用户路径
+//                .addPathPatterns("/api/v1/deals/**")//拦截所有交易路径
+//                .addPathPatterns("/api/v1/trades/**");//拦截所有商品路径
+//                //.excludePathPatterns("/api/v1/users/register");//排除注册路径
     }
 }

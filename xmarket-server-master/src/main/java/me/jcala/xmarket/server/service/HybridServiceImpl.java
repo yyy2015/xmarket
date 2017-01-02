@@ -111,7 +111,7 @@ public class HybridServiceImpl implements HybridService{
             ObjectMapper mapper=new ObjectMapper();
             Team teamBean=mapper.readValue(teamStr,Team.class);
             List<String> imgUrls= FileTool.uploadMultiFiles(ApplicationInfo.getPicHome(),request);
-            teamBean.setStatus(false);
+            teamBean.setStatus(true);
             teamBean.setImg(imgUrls.get(0));
             teamBean.setIdImg(imgUrls.get(1));
             team=teamRepository.save(teamBean);
@@ -191,7 +191,7 @@ public class HybridServiceImpl implements HybridService{
         if (reqMsg==null){
             return RespFactory.INSTANCE().paramsError();
         }
-        reqMsg.setKind(2);
+        reqMsg.setKind(0);
         String tradeId=message.getTradeId();
         customRepository.deleteFromUserTrades("sellTrades",message.getUserId(),tradeId);
         customRepository.addToUserTrades("soldTrades",message.getUserId(),tradeId);
