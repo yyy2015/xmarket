@@ -33,14 +33,16 @@ public class MessageService  extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String userId= UserIntermediate.instance.getUser(this).getId();
-        Observable.interval(1L, AppConf.Message_Interval, TimeUnit.SECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((Long aLong) ->{
-                    int num=MessageIntermediate.instance.getNum();
-                    model.executeMessageReq(null,num,userId,realm);
-                });
+        if (!AppConf.useMock) {
+            String userId= UserIntermediate.instance.getUser(this).getId();
+            Observable.interval(1L, AppConf.Message_Interval, TimeUnit.SECONDS)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe((Long aLong) ->{
+                        int num=MessageIntermediate.instance.getNum();
+                        model.executeMessageReq(null,num,userId,realm);
+                    });
+        }
         return START_NOT_STICKY;
     }
     @Override

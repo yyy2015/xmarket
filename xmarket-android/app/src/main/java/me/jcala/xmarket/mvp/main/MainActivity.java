@@ -1,6 +1,7 @@
 package me.jcala.xmarket.mvp.main;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
@@ -24,6 +25,7 @@ import butterknife.Unbinder;
 import io.realm.Realm;
 import me.jcala.xmarket.R;
 import me.jcala.xmarket.mvp.a_base.BaseActivity;
+import me.jcala.xmarket.mvp.message.MessageReceiver;
 import me.jcala.xmarket.mvp.message.MessageService;
 import me.jcala.xmarket.util.PollingUtils;
 

@@ -8,6 +8,14 @@ android {
 
     defaultConfig {
         applicationId "me.jcala.xmarket"
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a','x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "50dad89f3e19be5f900d59fd", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
@@ -64,4 +72,7 @@ dependencies {
     compile ("com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"){
         exclude module: 'rxjava'
     }
+    //-------------------jpush--------------------------------
+    compile 'cn.jiguang.sdk:jpush:3.0.1' // 此处以JPush 3.0.0 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.0' // 此处以JCore 1.0.0 版本为例。
 }
