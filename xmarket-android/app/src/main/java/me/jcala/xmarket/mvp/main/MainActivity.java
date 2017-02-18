@@ -50,7 +50,7 @@ public class MainActivity  extends BaseActivity
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.main_activity);
         realm=Realm.getDefaultInstance();
-        PollingUtils.startPollingService(this, 5, MessageService.class, MessageService.ACTION);
+        //PollingUtils.startPollingService(this, 5, MessageService.class, MessageService.ACTION);
         unbinder=ButterKnife.bind(this);
 
         presenter=new MainPresenterImpl(this,realm);

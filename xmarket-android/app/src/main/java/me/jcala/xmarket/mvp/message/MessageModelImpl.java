@@ -5,6 +5,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import me.jcala.xmarket.AppConf;
+import me.jcala.xmarket.mock.MessageMock;
 import me.jcala.xmarket.network.Api;
 import me.jcala.xmarket.network.ReqExecutor;
 import me.jcala.xmarket.data.dto.MsgDto;
@@ -50,6 +51,10 @@ public class MessageModelImpl implements MessageModel{
 
     @Override
     public void executeMessageReq(OnMessageListener listener, int num, String userId, Realm realmDefault) {
+        if (AppConf.useMock) {
+            listener.onGetMsgSuccess(new MessageMock().gainMsg().getData().getMsgs());
+            return;
+        }
         Result<List<Message>> result = new Result<>();
         ReqExecutor
                 .INSTANCE()
