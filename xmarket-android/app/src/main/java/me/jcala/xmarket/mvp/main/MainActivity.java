@@ -1,7 +1,6 @@
 package me.jcala.xmarket.mvp.main;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.design.widget.NavigationView;
@@ -23,9 +22,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.realm.Realm;
+import me.jcala.xmarket.AppConf;
 import me.jcala.xmarket.R;
+import me.jcala.xmarket.data.pojo.User;
+import me.jcala.xmarket.data.storage.SharedPreferencesStorage;
 import me.jcala.xmarket.mvp.a_base.BaseActivity;
-import me.jcala.xmarket.mvp.message.MessageReceiver;
 import me.jcala.xmarket.mvp.message.MessageService;
 import me.jcala.xmarket.util.PollingUtils;
 
@@ -51,6 +52,10 @@ public class MainActivity  extends BaseActivity
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.main_activity);
+        if (AppConf.useMock) {
+            SharedPreferencesStorage.instance.saveUser(getApplicationContext(),
+                    new User("1","cuiods","123456","南京大学","18795859216","http://jcalaz.github.io/img/sort_avater_cluo.jpg"));
+        }
         realm=Realm.getDefaultInstance();
         //PollingUtils.startPollingService(this, 5, MessageService.class, MessageService.ACTION);
         unbinder=ButterKnife.bind(this);
@@ -112,7 +117,6 @@ public class MainActivity  extends BaseActivity
                     searchView.setQuery(searchWrd, false);
                 }
             }
-
             return;
         }
         super.onActivityResult(requestCode, resultCode, data);

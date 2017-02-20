@@ -2,6 +2,7 @@ package me.jcala.xmarket.data.pojo;
 
 
 import io.realm.RealmObject;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class User extends RealmObject {
     private String id;
     private String username;//用户名
