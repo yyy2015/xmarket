@@ -10,6 +10,7 @@ import me.jcala.xmarket.server.entity.configuration.TradeType;
 import me.jcala.xmarket.server.entity.document.*;
 import me.jcala.xmarket.server.entity.pojo.Result;
 import me.jcala.xmarket.server.repository.*;
+import me.jcala.xmarket.server.service.inter.MessageService;
 import me.jcala.xmarket.server.service.inter.UserService;
 import me.jcala.xmarket.server.utils.CustomValidator;
 import me.jcala.xmarket.server.utils.RespFactory;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
@@ -44,6 +46,8 @@ public class UserServiceImpl implements UserService {
 
     private TeamRepository teamRepository;
 
+    @Resource
+    private MessageService messageService;
     @Autowired
     public UserServiceImpl(UserRepository userRepository, CustomRepositoryImpl customRepository,
                            MessageRepository messageRepository, TradeRepository tradeRepository,
@@ -283,6 +287,7 @@ public class UserServiceImpl implements UserService {
         message.setTradeId(tradeId);
         message.setTradeImg(tradeImg);
         messageRepository.save(message);
+        messageService.pushMessage(user.getId(),"商品已经捐赠");
         return RespFactory.INSTANCE().ok();
     }
 

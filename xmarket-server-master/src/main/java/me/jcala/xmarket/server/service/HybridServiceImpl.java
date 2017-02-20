@@ -14,6 +14,7 @@ import me.jcala.xmarket.server.entity.pojo.Result;
 import me.jcala.xmarket.server.exception.SysDataException;
 import me.jcala.xmarket.server.repository.*;
 import me.jcala.xmarket.server.service.inter.HybridService;
+import me.jcala.xmarket.server.service.inter.MessageService;
 import me.jcala.xmarket.server.utils.CustomValidator;
 import me.jcala.xmarket.server.utils.FileTool;
 import me.jcala.xmarket.server.utils.RespFactory;
@@ -26,6 +27,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +43,9 @@ public class HybridServiceImpl implements HybridService{
     private CustomRepository customRepository;
     private MessageRepository messageRepository;
     private TradeRepository tradeRepository;
+
+    @Resource
+    private MessageService messageService;
 
     @Autowired
     public HybridServiceImpl(SystemGetRepository systemCrudRepository, TeamRepository teamRepository,
@@ -200,6 +205,7 @@ public class HybridServiceImpl implements HybridService{
         customRepository.updateTradeStatus(tradeId,1);
         messageRepository.save(reqMsg);
         messageRepository.save(message);
+        messageService.pushMessage(message.getUserId(),"交易已确认");
         return RespFactory.INSTANCE().ok();
     }
 }

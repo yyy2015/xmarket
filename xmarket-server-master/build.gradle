@@ -12,11 +12,20 @@ buildscript {
         maven { url "http://repo.spring.io/release" }
         maven { url "http://repo.spring.io/milestone" }
         maven { url "http://repo.spring.io/snapshot" }
+        maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
+        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootPluginVersion}")
         classpath 'org.springframework:springloaded:1.2.5.RELEASE'
     }
+}
+
+configure(allprojects) {
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-maven'
+    apply plugin: 'propdeps-idea'
+    apply plugin: 'propdeps-eclipse'
 }
 
 apply plugin: 'java'
@@ -64,6 +73,8 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-undertow:${springBootVersion}"
     //--------------------- 工具------------------------------
     compile 'org.projectlombok:lombok:1.16.10'
+    compile 'cn.jpush.api:jpush-client:3.2.15'
+    optional "org.springframework.boot:spring-boot-configuration-processor"
     //---------------------JSR303-----------------------------
     compile 'org.hibernate:hibernate-validator:5.2.4.Final'//5.3.0版本会报错
     //---------------------mongo------------------------------
@@ -84,4 +95,5 @@ dependencies {
     //--------------------单元测试--------u-----------------------
     testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compileJava.dependsOn(processResources)
 }
