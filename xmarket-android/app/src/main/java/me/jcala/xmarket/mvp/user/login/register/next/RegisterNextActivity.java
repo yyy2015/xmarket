@@ -24,6 +24,7 @@ import me.jcala.xmarket.di.components.DaggerRegisterNextComponent;
 import me.jcala.xmarket.di.modules.RegisterNextModule;
 import me.jcala.xmarket.mvp.a_base.BaseActivity;
 import me.jcala.xmarket.mvp.main.MainActivity;
+import me.jcala.xmarket.mvp.user.login.LoginRegisterActivity;
 
 public class RegisterNextActivity extends BaseActivity implements RegisterNextView{
 
@@ -108,7 +109,7 @@ public class RegisterNextActivity extends BaseActivity implements RegisterNextVi
 
     @Override
     public void whenRegisterSuccess() {
-        Intent intent=new Intent(RegisterNextActivity.this,MainActivity.class);
+        Intent intent=new Intent(RegisterNextActivity.this,LoginRegisterActivity.class);
         startActivity(intent);
         finish();
     }

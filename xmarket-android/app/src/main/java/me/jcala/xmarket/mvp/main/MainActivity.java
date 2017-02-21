@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ import me.jcala.xmarket.data.pojo.User;
 import me.jcala.xmarket.data.storage.SharedPreferencesStorage;
 import me.jcala.xmarket.mvp.a_base.BaseActivity;
 import me.jcala.xmarket.mvp.message.MessageService;
+import me.jcala.xmarket.mvp.user.login.LoginRegisterActivity;
 import me.jcala.xmarket.util.PollingUtils;
 
 public class MainActivity  extends BaseActivity
@@ -70,7 +72,12 @@ public class MainActivity  extends BaseActivity
         toggle.syncState();
         View headerLayout= navigationView.inflateHeaderView(R.layout.main_slide);
         navigationView.setNavigationItemSelectedListener(this);
-        presenter.init(searchView,headerLayout);
+        boolean testLogin = presenter.init(searchView,headerLayout);
+        if (!testLogin) {
+            Intent intent = new Intent();
+            intent.setClass(getApplicationContext(),LoginRegisterActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override

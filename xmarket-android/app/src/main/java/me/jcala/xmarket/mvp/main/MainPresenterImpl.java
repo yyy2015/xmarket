@@ -61,10 +61,11 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void init(MaterialSearchView searchView, View header) {
-        initHeader(header);
+    public boolean init(MaterialSearchView searchView, View header) {
+        boolean result = initHeader(header);
         initSearchView(searchView);
         initBottomMenu();
+        return result;
     }
 
     public void initSearchView(MaterialSearchView searchView) {
@@ -99,17 +100,18 @@ public class MainPresenterImpl implements MainPresenter {
         });
     }
 
-    public void initHeader(View headerLayout) {
+    public boolean initHeader(View headerLayout) {
         User user= UserIntermediate.instance.getUser(context);
-        if (user!=null) {
+        if (user!=null && user.getUsername()!=null && !user.getPhone().isEmpty()) {
             mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, user.getId()));
-        }
+        } else return false;
         TextView username=(TextView) headerLayout.findViewById(R.id.info_username);
         TextView phone=(TextView) headerLayout.findViewById(R.id.info_phone);
         SimpleDraweeView avatar=(SimpleDraweeView) headerLayout.findViewById(R.id.info_avatar);
         username.setText(user.getUsername());
         phone.setText(user.getPhone());
         avatar.setImageURI(Uri.parse(AppConf.BASE_URL+user.getAvatarUrl()));
+        return true;
     }
 
     public void initBottomMenu() {
