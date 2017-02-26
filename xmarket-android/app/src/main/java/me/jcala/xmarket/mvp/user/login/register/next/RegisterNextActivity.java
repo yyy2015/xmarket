@@ -25,6 +25,7 @@ import me.jcala.xmarket.di.modules.RegisterNextModule;
 import me.jcala.xmarket.mvp.a_base.BaseActivity;
 import me.jcala.xmarket.mvp.main.MainActivity;
 import me.jcala.xmarket.mvp.user.login.LoginRegisterActivity;
+import me.jcala.xmarket.mvp.user.login.register.phone.RegisterPhoneActivity;
 
 public class RegisterNextActivity extends BaseActivity implements RegisterNextView{
 
@@ -109,7 +110,12 @@ public class RegisterNextActivity extends BaseActivity implements RegisterNextVi
 
     @Override
     public void whenRegisterSuccess() {
-        Intent intent=new Intent(RegisterNextActivity.this,LoginRegisterActivity.class);
+//        Intent intent=new Intent(RegisterNextActivity.this,LoginRegisterActivity.class);
+//        startActivity(intent);
+//        finish();
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), RegisterPhoneActivity.class);
+        intent.putExtra("userId",userId);
         startActivity(intent);
         finish();
     }

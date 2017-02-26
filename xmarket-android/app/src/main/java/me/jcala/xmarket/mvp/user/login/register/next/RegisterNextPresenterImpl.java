@@ -54,7 +54,7 @@ public class RegisterNextPresenterImpl
         }
         switch (result.getCode()) {
             case 100:
-                SharedPreferencesStorage.instance.saveUser(context,result.getData());
+                //SharedPreferencesStorage.instance.saveUser(context,result.getData());
                 view.whenRegisterSuccess();
                 break;
             case 99:
