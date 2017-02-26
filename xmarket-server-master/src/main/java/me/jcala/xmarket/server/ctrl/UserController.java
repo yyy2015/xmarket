@@ -1,10 +1,16 @@
 package me.jcala.xmarket.server.ctrl;
 
+import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
+import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import me.jcala.xmarket.server.conf.ApiConf;
+import me.jcala.xmarket.server.conf.DayuConfig;
 import me.jcala.xmarket.server.entity.configuration.TradeType;
 import me.jcala.xmarket.server.entity.pojo.Result;
 import me.jcala.xmarket.server.service.inter.UserService;
@@ -15,13 +21,19 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Random;
 
 @Api("跟用户信息有关的api")
 @RestController
 public class UserController {
 
     private UserService userService;
+
+    @Resource
+    private DayuConfig dayuConfig;
 
 
     @Autowired
@@ -59,7 +71,22 @@ public class UserController {
 
     @ApiOperation(value = "设置用户学校和电话号码",response = Result.class,produces = "application/json;charset=UTF-8")
     @PutMapping(value = ApiConf.register_next,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> registerNext(@PathVariable("userId") String id,@RequestParam String phone,@RequestParam String school){
+    public ResponseEntity<?> registerNext(@PathVariable("userId") String id,@RequestParam String phone,
+                                          @RequestParam String school, HttpServletRequest request) throws ApiException {
+        String url = "http://gw.api.taobao.com/router/rest";
+        Random random = new Random();
+        int code = random.nextInt(9999)%(9999-1000+1) + 1000;
+        HttpSession session = request.getSession();
+        session.setAttribute("code",code+"");
+        session.setAttribute("phone",phone);
+        TaobaoClient client = new DefaultTaobaoClient(url, dayuConfig.getAppKey(), dayuConfig.getAppSecret());
+        AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+        req.setSmsType("normal");
+        req.setSmsFreeSignName("xmarke市场");
+        req.setSmsParamString("{\"code\":\""+code+"\"}");
+        req.setRecNum(phone);
+        req.setSmsTemplateCode(dayuConfig.getTemplateId());
+        client.execute(req);
         return userService.updatePhoneSchool(id,phone,school);
     }
 

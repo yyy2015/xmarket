@@ -16,6 +16,8 @@ public interface UserService {
 
     ResponseEntity<?> updatePhoneSchool(String id, String phone,String school);//设置用户所在的学校
 
+    ResponseEntity<?> updatePhone(String id, String phone);
+
     ResponseEntity<?> updatePassword(String username, String oldPass, String newPass);//更新用户信息
 
     ResponseEntity<?> updateAvatar(String username, HttpServletRequest request) throws Exception;//更新用户头像

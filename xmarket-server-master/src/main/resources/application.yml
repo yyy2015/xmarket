@@ -5,3 +5,8 @@ spring:
 jpush:
   appKey: 50dad89f3e19be5f900d59fd
   masterSecret: de6d28235d38e424e8c0f351
+---
+dayu:
+  appKey: 23652546
+  appSecret: fd0b17ef2e8ba61a224c091ac904f2a3
+  templateId: SMS_48730020

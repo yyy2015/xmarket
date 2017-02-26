@@ -6,6 +6,7 @@ package me.jcala.xmarket.server.repository;
  */
 public interface CustomRepository {
     void updateUserPhoneSchool(String userId, String phone,String school);//通过username更新所在学校的信息
+    void updateUserPhone(String userId, String phone);
     void updateUserPassword(String userId,String password);//修改用户密码
     void updateUserAvatar(String userId,String avatar_url);//更新用户的头像
     void addToUserTrades(String whichCol, String userId, String tradeId);//用户待售商品列数组加入数据

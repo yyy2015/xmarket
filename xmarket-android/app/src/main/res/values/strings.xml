@@ -32,6 +32,8 @@
     <string name="register_next_school">点击设置学校</string>
     <string name="register_next_phone">手机号</string>
     <string name="register_next_school_choose">请选择学校</string>
+    <string name="register_phone_verify">请输入验证码</string>
+    <string name="register_phone_confirm">验证</string>
 
     <!-- 个人信息页面  -->
     <string name="info_username">jcala</string>

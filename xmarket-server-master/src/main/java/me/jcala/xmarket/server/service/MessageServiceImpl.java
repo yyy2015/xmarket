@@ -11,6 +11,7 @@ import cn.jpush.api.push.model.audience.Audience;
 import cn.jpush.api.push.model.notification.Notification;
 import me.jcala.xmarket.server.conf.JPushConfig;
 import me.jcala.xmarket.server.service.inter.MessageService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -18,7 +19,7 @@ import javax.annotation.Resource;
  * Message service impl
  * @author cuihao
  */
-@Resource
+@Service
 public class MessageServiceImpl implements MessageService {
 
     @Resource

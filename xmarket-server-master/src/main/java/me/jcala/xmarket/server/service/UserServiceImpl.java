@@ -46,17 +46,17 @@ public class UserServiceImpl implements UserService {
 
     private TeamRepository teamRepository;
 
-    @Resource
     private MessageService messageService;
     @Autowired
     public UserServiceImpl(UserRepository userRepository, CustomRepositoryImpl customRepository,
                            MessageRepository messageRepository, TradeRepository tradeRepository,
-                           TeamRepository teamRepository) {
+                           TeamRepository teamRepository, MessageServiceImpl messageService) {
         this.userRepository = userRepository;
         this.customRepository = customRepository;
         this.messageRepository = messageRepository;
         this.tradeRepository = tradeRepository;
         this.teamRepository = teamRepository;
+        this.messageService = messageService;
     }
 
     @Override
@@ -161,12 +161,28 @@ public class UserServiceImpl implements UserService {
         if (user==null){
             return RespFactory.INSTANCE().notFoundError();
         }
-        if (userRepository.countByPhone(phone) > 0){
-            return new ResponseEntity<>(new Result<String>().api(Api.USER_PHONE_EXIST),HttpStatus.OK);
-        }
+//        if (userRepository.countByPhone(phone) > 0){
+//            return new ResponseEntity<>(new Result<String>().api(Api.USER_PHONE_EXIST),HttpStatus.OK);
+//        }
         customRepository.updateUserPhoneSchool(id,phone,school);
         Result<User> userResult=new Result<User>().api(Api.SUCCESS);
         user.setSchool(school);
+//        user.setPhone(phone);
+        userResult.setData(user);
+        return new ResponseEntity<>(userResult,HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> updatePhone(String id, String phone) {
+        User user=userRepository.findOne(id);
+        if (user==null){
+            return RespFactory.INSTANCE().notFoundError();
+        }
+        if (userRepository.countByPhone(phone) > 0){
+            return new ResponseEntity<>(new Result<String>().api(Api.USER_PHONE_EXIST),HttpStatus.OK);
+        }
+        customRepository.updateUserPhone(id,phone);
+        Result<User> userResult=new Result<User>().api(Api.SUCCESS);
         user.setPhone(phone);
         userResult.setData(user);
         return new ResponseEntity<>(userResult,HttpStatus.OK);

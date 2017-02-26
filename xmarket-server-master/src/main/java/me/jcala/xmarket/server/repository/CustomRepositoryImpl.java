@@ -24,6 +24,12 @@ public class CustomRepositoryImpl implements CustomRepository{
         template.updateFirst(new Query(where("_id").is(userId)),
                 new Update().set("school",school), User.class);
 
+//        template.updateFirst(new Query(where("_id").is(userId)),
+//                new Update().set("phone",phone), User.class);
+    }
+
+    @Override
+    public void updateUserPhone(String userId, String phone) {
         template.updateFirst(new Query(where("_id").is(userId)),
                 new Update().set("phone",phone), User.class);
     }

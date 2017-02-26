@@ -10,7 +10,8 @@ public enum Api {
     USER_NAME_EXIST(203,"该用户名已经存在"),
     USER_PHONE_EXIST(204,"该手机号已经被注册"),
     USER_OLD_PASS_ERR(205,"原密码错误"),
-    USER_MSG_LATEST(206,"消息数据已经最新");
+    USER_MSG_LATEST(206,"消息数据已经最新"),
+    USER_PHONE_ERR(207,"验证码错误");
 
     private int code;
     private String msg;

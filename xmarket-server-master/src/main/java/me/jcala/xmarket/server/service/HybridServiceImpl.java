@@ -43,19 +43,18 @@ public class HybridServiceImpl implements HybridService{
     private CustomRepository customRepository;
     private MessageRepository messageRepository;
     private TradeRepository tradeRepository;
-
-    @Resource
     private MessageService messageService;
 
     @Autowired
     public HybridServiceImpl(SystemGetRepository systemCrudRepository, TeamRepository teamRepository,
                              CustomRepository customRepository, MessageRepository messageRepository,
-                             TradeRepository tradeRepository) {
+                             TradeRepository tradeRepository, MessageServiceImpl messageService) {
         this.systemCrudRepository = systemCrudRepository;
         this.teamRepository = teamRepository;
         this.customRepository = customRepository;
         this.messageRepository = messageRepository;
         this.tradeRepository = tradeRepository;
+        this.messageService = messageService;
     }
 
     @Override

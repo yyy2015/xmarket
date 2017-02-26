@@ -59,6 +59,15 @@ public interface UserReq {
             @Field("phone")  String phone,
             @Field("school")  String school);
 
+    @POST(ApiConf.register_phone)
+    @FormUrlEncoded
+    Observable<Result<String>> sendMsg(@Field("phoneNum") String phoneNum);
+
+    @POST(ApiConf.register_phone_verify)
+    @FormUrlEncoded
+    Observable<Result> verifyMsg(@Field("userId") String userId,
+                                 @Field("code") String code);
+
     /**
      * 获取用户发起的志愿队列表
      */

@@ -56,6 +56,9 @@
             android:name=".mvp.user.login.register.next.RegisterNextActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name=".mvp.user.login.register.phone.RegisterPhoneActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".mvp.trade.add.TradeAddActivity"
             android:label="添加商品"
             android:theme="@style/AppTheme.NoActionBar"/>
