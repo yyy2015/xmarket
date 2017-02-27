@@ -70,7 +70,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     public void initSearchView(MaterialSearchView searchView) {
         searchView.setVoiceSearch(false);
-        searchView.setCursorDrawable(R.drawable.color_cursor_white);
+//        searchView.setCursorDrawable(R.drawable.color_cursor_white);
         searchView.setSuggestions(context.getResources().getStringArray(R.array.query_suggestions));
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
