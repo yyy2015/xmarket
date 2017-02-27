@@ -49,7 +49,7 @@ public class TradeServiceImpl implements TradeService {
         }
 
         Result<List<Trade>> result=new Result<List<Trade>>().api(Api.SUCCESS);
-        List<Trade> trades=tradeRepository.searchBySchoolAndTitle(schoolName, "/"+title+"/",0,page);
+        List<Trade> trades=tradeRepository.findBySchoolNameAndTitleAndStatus(schoolName, title,0,page);
         result.setData(trades);
 
         return new ResponseEntity<>(result,HttpStatus.OK);
