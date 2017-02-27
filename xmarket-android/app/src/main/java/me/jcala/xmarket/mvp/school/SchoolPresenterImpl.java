@@ -58,6 +58,12 @@ public class SchoolPresenterImpl implements SchoolModel.onGainListener,SchoolPre
     }
 
     @Override
+    public void searchTrades(String title, Realm realm) {
+        String schoolName= UserIntermediate.instance.getUser(context).getSchool();
+        model.executeSearchTradesReq(this,schoolName, title,0,realm);
+    }
+
+    @Override
     public void refreshView(Realm realm) {
         String schoolName= UserIntermediate.instance.getUser(context).getSchool();
         model.executeGetTradesReq(this,schoolName,0,realm);

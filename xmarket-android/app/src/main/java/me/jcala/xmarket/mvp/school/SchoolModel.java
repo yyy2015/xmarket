@@ -12,4 +12,6 @@ public interface SchoolModel {
         void onReqComplete(Result<List<Trade>> result, Realm realm);
     }
     void executeGetTradesReq(onGainListener listener,String schoolName,int page,Realm realm);
+
+    void executeSearchTradesReq(onGainListener listener,String schoolName,String title, int page,Realm realm);
 }

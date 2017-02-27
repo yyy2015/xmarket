@@ -2,7 +2,6 @@ package me.jcala.xmarket.network;
 
 import java.util.List;
 
-import me.jcala.xmarket.network.ApiConf;
 import me.jcala.xmarket.data.dto.Result;
 import me.jcala.xmarket.data.pojo.Trade;
 import me.jcala.xmarket.data.pojo.TradeTag;
@@ -50,6 +49,17 @@ public interface TradeReq {
     @GET(ApiConf.get_school_trades)
     Observable<Result<List<Trade>>> getSchoolTrades(
             @Path("schoolName")  String school,
+            @Query("page") int page,
+            @Query("size") int size
+    );
+
+    /**
+     * 根据学校名称和商品标题搜索本校在售商品列表
+     */
+    @GET(ApiConf.search_trades)
+    Observable<Result<List<Trade>>> searchSchoolTradesByTitle(
+            @Path("schoolName")  String school,
+            @Path("title") String title,
             @Query("page") int page,
             @Query("size") int size
     );

@@ -56,6 +56,11 @@ public class SchoolFragment extends BaseFragment implements SchoolView{
     }
 
     @Override
+    public void searchTrades(String title) {
+        presenter.searchTrades(title, realm);
+    }
+
+    @Override
     public void whenHideRefresh() {
         refreshLayout.setRefreshing(false);
     }
