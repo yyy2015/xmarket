@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -19,11 +20,14 @@ public class TeamTradePresenterImpl implements TeamTradePresenter,TeamTradeModel
     private Context context;
     private TeamTradeView view;
     private TeamTradeModel model;
+    private TextView hintText;
 
     public TeamTradePresenterImpl(Context context, TeamTradeView view) {
         this.context = context;
         this.view = view;
         this.model=new TeamTradeModelImpl();
+        this.hintText = (TextView)((TeamTradeActivity)context).findViewById(R.id.noItem_hint);
+        this.hintText.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -39,6 +43,12 @@ public class TeamTradePresenterImpl implements TeamTradePresenter,TeamTradeModel
         initList(result.getData());
     }
     private void initList(List<Trade> trades){
+        if(trades.isEmpty()){
+            hintText.setVisibility(View.VISIBLE);
+            return;
+        }else{
+            hintText.setVisibility(View.GONE);
+        }
         RecyclerCommonAdapter<?> adapter=new RecyclerCommonAdapter<Trade>(context,trades, R.layout.school_item) {
             @Override
             public void convert(RecyclerViewHolder viewHolder, Trade item) {
