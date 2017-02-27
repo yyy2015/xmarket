@@ -26,6 +26,6 @@ public class Trade{
     private List<String> imgUrls;//商品图片
     private long createTime;//商品创建时间
     private int status;//商品状态。0:在售，1:售出,2:捐赠
-//    @Expose
-//    private boolean releaseCheck;//为了在发布时方便检查数据完整性，不存储在数据库中
+    @Expose
+    private boolean releaseCheck;//为了在发布时方便检查数据完整性，不存储在数据库中
 }
