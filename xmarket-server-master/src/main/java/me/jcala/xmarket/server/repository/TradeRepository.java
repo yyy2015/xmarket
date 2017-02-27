@@ -26,4 +26,7 @@ public interface TradeRepository extends MongoRepository<Trade,String>{
     @Query(value = "{ 'id' : ?0 }", fields = "{ 'id': 1,'title':1,'price':1,'imgUrls': 1,'author':1}")
     Trade findPartsById(String id);
 
+    //dbc add search query
+    @Query(fields = "{ 'id': 1,'title':1,'price':1,'imgUrls': 1,'author':1}")
+    List<Trade> searchBySchoolAndTitle(@Param("schoolName") String schoolName, @Param("title") String title, @Param("status") int status, Pageable pageable);
 }

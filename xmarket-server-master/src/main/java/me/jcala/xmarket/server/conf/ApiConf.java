@@ -20,7 +20,8 @@ public interface ApiConf {
     String get_team_trades="api/v1/trades/team/{teamName}/get";//获取该志愿队收到捐赠的商品列表
     String get_trade="api/v1/trades/{tradeId}/get";//通过id获取商品的详细信息+
     String create_trade="api/v1/trades/create";//发布商品+
-
+    //dbc add search
+    String search_trades="api/v1/trades/{schoolName}/{title}/get";
 
     //------------------------Hybrid 志愿队相关------------------------
     String create_team="api/v1/teams/create";//创建志愿队

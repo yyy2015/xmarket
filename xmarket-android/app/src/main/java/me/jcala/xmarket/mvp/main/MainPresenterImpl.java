@@ -5,7 +5,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +27,6 @@ import me.jcala.xmarket.app.App;
 import me.jcala.xmarket.data.pojo.Message;
 import me.jcala.xmarket.data.pojo.RealmTrade;
 import me.jcala.xmarket.data.pojo.Team;
-import me.jcala.xmarket.data.pojo.TradeTag;
 import me.jcala.xmarket.data.pojo.User;
 import me.jcala.xmarket.data.storage.UserIntermediate;
 import me.jcala.xmarket.mvp.message.MessageFragment;
@@ -48,6 +46,7 @@ public class MainPresenterImpl implements MainPresenter {
     private SchoolFragment schoolFragment;
     private MessageFragment messageFragment;
     private FragmentManager fm;
+    private MaterialSearchView mSearchView;
     TextView toolbarTitle;
     BottomNavigationBar mBottomNavigationBar;
     private Realm realmDefault;
@@ -58,6 +57,7 @@ public class MainPresenterImpl implements MainPresenter {
         fm = context.getFragmentManager();
         toolbarTitle=(TextView)context.findViewById(R.id.toolbar_title);
         mBottomNavigationBar=(BottomNavigationBar)context.findViewById(R.id.bottom_navigation_bar);
+        mSearchView = (MaterialSearchView)context.findViewById(R.id.search_view);
     }
 
     @Override
@@ -75,8 +75,8 @@ public class MainPresenterImpl implements MainPresenter {
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Snackbar.make(context.findViewById(R.id.toolbar_container), "Query: " + query, Snackbar.LENGTH_LONG)
-                        .show();
+                //dbc add
+                schoolFragment.searchTrades(query);
                 return false;
             }
 
@@ -133,14 +133,26 @@ public class MainPresenterImpl implements MainPresenter {
                         break;
                     case 1:
                         toolbarTitle.setText(R.string.MainActivity_title_sort);
+                        //dbc add: disable search
+                        mSearchView.setEnabled(false);
+                        mSearchView.setVisibility(View.INVISIBLE);
+                        //dbc add end
                         showFragment(1);
                         break;
                     case 2:
                         toolbarTitle.setText(R.string.MainActivity_title_team);
+                        //dbc add: disable search
+                        mSearchView.setEnabled(false);
+                        mSearchView.setVisibility(View.INVISIBLE);
+                        //dbc add end
                        showFragment(2);
                         break;
                     case 3:
                         toolbarTitle.setText(R.string.MainActivity_title_message);
+                        //dbc add: disable search
+                        mSearchView.setEnabled(false);
+                        mSearchView.setVisibility(View.INVISIBLE);
+                        //dbc add end
                         showFragment(3);
                         break;
                 }

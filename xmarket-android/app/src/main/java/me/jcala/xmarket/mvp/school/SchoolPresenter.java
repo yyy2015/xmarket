@@ -9,4 +9,6 @@ public interface SchoolPresenter {
 
     void refreshView(Realm realm);
 
+    void searchTrades(String title, Realm realm);
+
 }

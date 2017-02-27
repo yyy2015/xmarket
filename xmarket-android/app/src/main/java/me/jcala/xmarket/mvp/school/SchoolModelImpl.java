@@ -47,4 +47,36 @@ class SchoolModelImpl implements SchoolModel{
                 });
     }
 
+    @Override
+    public void executeSearchTradesReq(onGainListener listener, String schoolName, String title, int page, Realm realm) {
+        if (AppConf.useMock){
+            listener.onReqComplete(new TradeMock().gainSchoolTrades(),realm);
+            return;
+        }
+        Result<List<Trade>> result = new Result<List<Trade>>().api(Api.SERVER_ERROR);
+        ReqExecutor
+                .INSTANCE()
+                .tradeReq()
+                .searchSchoolTradesByTitle(schoolName,title,page,AppConf.size)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Result<List<Trade>>>() {
+                    @Override
+                    public void onCompleted() {
+                        listener.onReqComplete(result,realm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        listener.onReqComplete(result,realm);
+                    }
+                    @Override
+                    public void onNext(Result<List<Trade>> listResult) {
+                        result.setCode(listResult.getCode());
+                        result.setMsg(listResult.getMsg());
+                        result.setData(listResult.getData());
+                    }
+                });
+    }
+
 }

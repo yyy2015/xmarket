@@ -87,7 +87,14 @@
     <!--用户商品列表页面-->
     <string name="user_trade_dialog_content">正在加载数据...</string>
 
-
+    <!--消息详情界面-->
+    <string name="customer_name">买家</string>
+    <string name="school_name">学校:</string>
+    <string name="username">姓名:</string>
+    <string name="phone_number">手机</string>
+    <string name="trade_goods">交易商品</string>
+    <string name="trade_state">交易状态</string>
+    <string name="seller_name">卖家</string>
 
 </resources>
 

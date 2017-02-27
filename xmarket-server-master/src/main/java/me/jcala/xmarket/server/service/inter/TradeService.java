@@ -17,4 +17,7 @@ public interface TradeService {
 
     ResponseEntity<?> createTrade(String trade,HttpServletRequest request);//发布商品
 
+    //dbc add search
+    ResponseEntity<?> searchByTitleAndSchool(String schoolName, String title, Pageable page);
+
 }

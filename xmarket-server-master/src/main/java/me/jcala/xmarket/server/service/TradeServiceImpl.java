@@ -43,6 +43,19 @@ public class TradeServiceImpl implements TradeService {
     }
 
     @Override
+    public ResponseEntity<?> searchByTitleAndSchool(String schoolName, String title, Pageable page) {
+        if (CustomValidator.hasEmpty(schoolName) || CustomValidator.hasEmpty(title)){
+            return RespFactory.INSTANCE().paramsError();
+        }
+
+        Result<List<Trade>> result=new Result<List<Trade>>().api(Api.SUCCESS);
+        List<Trade> trades=tradeRepository.searchBySchoolAndTitle(schoolName, "/"+title+"/",0,page);
+        result.setData(trades);
+
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<?> getTradeListByTagName(String tagName, Pageable page) {
         if (CustomValidator.hasEmpty(tagName)){
             return RespFactory.INSTANCE().paramsError();
