@@ -5,11 +5,9 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,7 +28,6 @@ import me.jcala.xmarket.app.App;
 import me.jcala.xmarket.data.pojo.Message;
 import me.jcala.xmarket.data.pojo.RealmTrade;
 import me.jcala.xmarket.data.pojo.Team;
-import me.jcala.xmarket.data.pojo.TradeTag;
 import me.jcala.xmarket.data.pojo.User;
 import me.jcala.xmarket.data.storage.UserIntermediate;
 import me.jcala.xmarket.mvp.message.MessageFragment;
@@ -46,6 +43,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     //added by yyy
     private boolean doShowSearch;
+    //end added
 
     private AppCompatActivity context;
     private TeamFragment teamFragment;
@@ -53,6 +51,8 @@ public class MainPresenterImpl implements MainPresenter {
     private SchoolFragment schoolFragment;
     private MessageFragment messageFragment;
     private FragmentManager fm;
+    private MaterialSearchView mSearchView;
+//    private MenuItem searchMenuItem;
     TextView toolbarTitle;
     BottomNavigationBar mBottomNavigationBar;
     private Realm realmDefault;
@@ -63,7 +63,10 @@ public class MainPresenterImpl implements MainPresenter {
         fm = context.getFragmentManager();
         toolbarTitle=(TextView)context.findViewById(R.id.toolbar_title);
         mBottomNavigationBar=(BottomNavigationBar)context.findViewById(R.id.bottom_navigation_bar);
+
         doShowSearch = true;
+
+        mSearchView = (MaterialSearchView)context.findViewById(R.id.search_view);
     }
 
     @Override
@@ -81,8 +84,8 @@ public class MainPresenterImpl implements MainPresenter {
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Snackbar.make(context.findViewById(R.id.toolbar_container), "Query: " + query, Snackbar.LENGTH_LONG)
-                        .show();
+                //dbc add
+                schoolFragment.searchTrades(query);
                 return false;
             }
 
@@ -135,18 +138,34 @@ public class MainPresenterImpl implements MainPresenter {
                 switch (position) {
                     case 0:
                         toolbarTitle.setText(R.string.MainActivity_title_school);
+                        //dbc add: disable search
+//                        searchMenuItem.setEnabled(true);
+//                        searchMenuItem.setVisible(true);
+                        //dbc add end
                         showFragment(0);
                         break;
                     case 1:
                         toolbarTitle.setText(R.string.MainActivity_title_sort);
+                        //dbc add: disable search
+//                        searchMenuItem.setEnabled(false);
+//                        searchMenuItem.setVisible(false);
+                        //dbc add end
                         showFragment(1);
                         break;
                     case 2:
                         toolbarTitle.setText(R.string.MainActivity_title_team);
+                        //dbc add: disable search
+//                        searchMenuItem.setEnabled(false);
+//                        searchMenuItem.setVisible(false);
+                        //dbc add end
                        showFragment(2);
                         break;
                     case 3:
                         toolbarTitle.setText(R.string.MainActivity_title_message);
+                        //dbc add: disable search
+//                        searchMenuItem.setEnabled(false);
+//                        searchMenuItem.setVisible(false);
+                        //dbc add end
                         showFragment(3);
                         break;
                 }
@@ -172,13 +191,14 @@ public class MainPresenterImpl implements MainPresenter {
     public boolean showSearch(){
         return doShowSearch;
     }
+    //end added
 
     public void showFragment(int position) {
         FragmentTransaction ft = fm.beginTransaction();
         hideAllFragment(ft);
         switch (position) {
             case 0 :
-                doShowSearch = true;
+                doShowSearch = true;//added
                 if (schoolFragment != null) {
                     ft.show(schoolFragment);
                 } else {
@@ -187,7 +207,7 @@ public class MainPresenterImpl implements MainPresenter {
                 }
                 break;
             case 1 :
-                doShowSearch=false;
+                doShowSearch=false;//added
                 if (tradeTagFragment != null) {
                     ft.show(tradeTagFragment);
                 } else {
@@ -196,7 +216,7 @@ public class MainPresenterImpl implements MainPresenter {
                 }
                 break;
             case 2 :
-                doShowSearch=true;
+                doShowSearch=false;//added
                 if (teamFragment != null) {
                     ft.show(teamFragment);
                 } else {
@@ -205,7 +225,7 @@ public class MainPresenterImpl implements MainPresenter {
                 }
                 break;
             case 3 :
-                doShowSearch=false;
+                doShowSearch=false;//added
                 if (messageFragment != null) {
                     ft.show(messageFragment);
                 } else {
@@ -214,7 +234,14 @@ public class MainPresenterImpl implements MainPresenter {
                 }
                 break;
         }
+        //added by yyy
         context.invalidateOptionsMenu();//重新渲染菜单
+        if(doShowSearch){
+            mSearchView.setVisibility(View.VISIBLE);
+        }else{
+            mSearchView.setVisibility(View.GONE);
+        }
+        //end added
         ft.commit();
     }
 
@@ -232,6 +259,11 @@ public class MainPresenterImpl implements MainPresenter {
             ft.hide(messageFragment);
         }
     }
+
+
+//    public void setSearchMenuItem(MenuItem item) {
+//        this.searchMenuItem = item;
+//    }
 
     @Override
     public void slideJump(int id) {
