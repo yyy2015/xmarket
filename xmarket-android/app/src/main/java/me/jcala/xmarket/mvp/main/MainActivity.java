@@ -91,7 +91,11 @@ public class MainActivity  extends BaseActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_top, menu);
         MenuItem item = menu.findItem(R.id.action_search);
+
+        item.setVisible(presenter.showSearch());
         searchView.setMenuItem(item);
+
+
         return true;
     }
 

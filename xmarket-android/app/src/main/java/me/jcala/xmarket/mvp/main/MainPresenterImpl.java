@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -42,6 +44,9 @@ import me.jcala.xmarket.util.JpushUtils;
 
 public class MainPresenterImpl implements MainPresenter {
 
+    //added by yyy
+    private boolean doShowSearch;
+
     private AppCompatActivity context;
     private TeamFragment teamFragment;
     private TradeTagFragment tradeTagFragment;
@@ -58,6 +63,7 @@ public class MainPresenterImpl implements MainPresenter {
         fm = context.getFragmentManager();
         toolbarTitle=(TextView)context.findViewById(R.id.toolbar_title);
         mBottomNavigationBar=(BottomNavigationBar)context.findViewById(R.id.bottom_navigation_bar);
+        doShowSearch = true;
     }
 
     @Override
@@ -161,39 +167,54 @@ public class MainPresenterImpl implements MainPresenter {
         showFragment(0);
     }
 
+    //added by yyy
+    @Override
+    public boolean showSearch(){
+        return doShowSearch;
+    }
+
     public void showFragment(int position) {
         FragmentTransaction ft = fm.beginTransaction();
         hideAllFragment(ft);
         switch (position) {
-            case 0 : if (schoolFragment != null) {
-                ft.show(schoolFragment);
-            } else {
-                schoolFragment = new SchoolFragment();
-                ft.add(R.id.frame_layout, schoolFragment);
-            }
+            case 0 :
+                doShowSearch = true;
+                if (schoolFragment != null) {
+                    ft.show(schoolFragment);
+                } else {
+                    schoolFragment = new SchoolFragment();
+                    ft.add(R.id.frame_layout, schoolFragment);
+                }
                 break;
-            case 1 : if (tradeTagFragment != null) {
-                ft.show(tradeTagFragment);
-            } else {
-                tradeTagFragment = new TradeTagFragment();
-                ft.add(R.id.frame_layout, tradeTagFragment);
-            }
+            case 1 :
+                doShowSearch=false;
+                if (tradeTagFragment != null) {
+                    ft.show(tradeTagFragment);
+                } else {
+                    tradeTagFragment = new TradeTagFragment();
+                    ft.add(R.id.frame_layout, tradeTagFragment);
+                }
                 break;
-            case 2 : if (teamFragment != null) {
-                ft.show(teamFragment);
-            } else {
-                teamFragment = new TeamFragment();
-                ft.add(R.id.frame_layout, teamFragment);
-            }
+            case 2 :
+                doShowSearch=true;
+                if (teamFragment != null) {
+                    ft.show(teamFragment);
+                } else {
+                    teamFragment = new TeamFragment();
+                    ft.add(R.id.frame_layout, teamFragment);
+                }
                 break;
-            case 3 : if (messageFragment != null) {
-                ft.show(messageFragment);
-            } else {
-                messageFragment = new MessageFragment();
-                ft.add(R.id.frame_layout, messageFragment);
-            }
+            case 3 :
+                doShowSearch=false;
+                if (messageFragment != null) {
+                    ft.show(messageFragment);
+                } else {
+                    messageFragment = new MessageFragment();
+                    ft.add(R.id.frame_layout, messageFragment);
+                }
                 break;
         }
+        context.invalidateOptionsMenu();//重新渲染菜单
         ft.commit();
     }
 
