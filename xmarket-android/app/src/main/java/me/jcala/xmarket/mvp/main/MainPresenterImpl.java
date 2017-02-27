@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -47,6 +48,7 @@ public class MainPresenterImpl implements MainPresenter {
     private MessageFragment messageFragment;
     private FragmentManager fm;
     private MaterialSearchView mSearchView;
+    private MenuItem searchMenuItem;
     TextView toolbarTitle;
     BottomNavigationBar mBottomNavigationBar;
     private Realm realmDefault;
@@ -129,29 +131,33 @@ public class MainPresenterImpl implements MainPresenter {
                 switch (position) {
                     case 0:
                         toolbarTitle.setText(R.string.MainActivity_title_school);
+                        //dbc add: disable search
+                        searchMenuItem.setEnabled(true);
+                        searchMenuItem.setVisible(true);
+                        //dbc add end
                         showFragment(0);
                         break;
                     case 1:
                         toolbarTitle.setText(R.string.MainActivity_title_sort);
                         //dbc add: disable search
-                        mSearchView.setEnabled(false);
-                        mSearchView.setVisibility(View.INVISIBLE);
+                        searchMenuItem.setEnabled(false);
+                        searchMenuItem.setVisible(false);
                         //dbc add end
                         showFragment(1);
                         break;
                     case 2:
                         toolbarTitle.setText(R.string.MainActivity_title_team);
                         //dbc add: disable search
-                        mSearchView.setEnabled(false);
-                        mSearchView.setVisibility(View.INVISIBLE);
+                        searchMenuItem.setEnabled(false);
+                        searchMenuItem.setVisible(false);
                         //dbc add end
                        showFragment(2);
                         break;
                     case 3:
                         toolbarTitle.setText(R.string.MainActivity_title_message);
                         //dbc add: disable search
-                        mSearchView.setEnabled(false);
-                        mSearchView.setVisibility(View.INVISIBLE);
+                        searchMenuItem.setEnabled(false);
+                        searchMenuItem.setVisible(false);
                         //dbc add end
                         showFragment(3);
                         break;
@@ -222,6 +228,11 @@ public class MainPresenterImpl implements MainPresenter {
         if (messageFragment != null) {
             ft.hide(messageFragment);
         }
+    }
+
+    @Override
+    public void setSearchMenuItem(MenuItem item) {
+        this.searchMenuItem = item;
     }
 
     @Override
