@@ -52,8 +52,8 @@ public class TradeTagDetailActivity extends BaseActivity implements TradeTagDeta
 
     @OnClick(R.id.trade_tag_back)
     void clickBack(){
-        Intent intent=new Intent(TradeTagDetailActivity.this, MainActivity.class);
-        startActivity(intent);
+//        Intent intent=new Intent(TradeTagDetailActivity.this, MainActivity.class);
+//        startActivity(intent);
         finish();
     }
 
