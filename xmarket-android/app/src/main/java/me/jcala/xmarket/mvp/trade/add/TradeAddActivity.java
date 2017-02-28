@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -120,27 +121,47 @@ public class TradeAddActivity extends BaseActivity implements TradeAddView{
                 .show();
     }
 
-   private void picSet(){
-       adapter=new CommonAdapter<String>(TradeAddActivity.this,picUrls,R.layout.trade_add_pic_item) {
-           @Override
-           public void convert(ViewHolder viewHolder, String picUrl) {
-               viewHolder.setFrescoImg(R.id.grid_iv, Uri.parse(picUrl));
-           }
-       };
-       AdapterView.OnItemClickListener listener=(AdapterView<?> parent, View view, int position, long id)->{
+    private void picSet(){
+        adapter=new CommonAdapter<String>(TradeAddActivity.this,picUrls,R.layout.trade_add_pic_item) {
+            @Override
+            public void convert(ViewHolder viewHolder, String picUrl, int position) {
+                Button deletePic = (Button) viewHolder.getConvertView().findViewById(R.id.bt_del);
+                if(position != picUrls.size()-1){
+                    deletePic.setVisibility(View.VISIBLE);
+                }else{
+                    deletePic.setVisibility(View.GONE);
+                }
+                deletePic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        picUrls.remove(picUrl);
+                        notifyDataSetChanged();
+//                       new SuperToast(TradeAddActivity.this)
+//                               .setText("删除图片"+position)
+//                               .setDuration(Style.DURATION_SHORT)
+//                               .setColor(PaletteUtils.getTransparentColor(PaletteUtils.MATERIAL_RED))
+//                               .setAnimations(Style.ANIMATIONS_POP)
+//                               .show();
+                    }
+                });
+                viewHolder.setFrescoImg(R.id.grid_iv, Uri.parse(picUrl));
+            }
+        };
+        AdapterView.OnItemClickListener listener=(AdapterView<?> parent, View view, int position, long id)->{
 
-         if (position == picUrls.size()-1){
-             picSelector();
-             return;
-         }
+            if (position == picUrls.size()-1){
+                picSelector();
+                return;
+            }
 
-       };
-       selectPics.setAdapter(adapter);
-       selectPics.setOnItemClickListener(listener);
+        };
+        selectPics.setAdapter(adapter);
+        selectPics.setOnItemClickListener(listener);
 
-   }
+    }
 
-     void picSelector(){
+
+    void picSelector(){
          if (picUrls.size()>8){
              return;
          }

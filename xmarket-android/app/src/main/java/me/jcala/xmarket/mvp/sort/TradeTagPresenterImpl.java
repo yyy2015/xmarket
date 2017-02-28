@@ -46,7 +46,7 @@ public class TradeTagPresenterImpl implements TradeTagPresenter,TradeTagModel.on
     private void initList(List<TradeTag> tagList){
         BaseAdapter adapter=new CommonAdapter<TradeTag>(mContext, tagList,R.layout.sort_grid_item) {
             @Override
-            public void convert(ViewHolder viewHolder, TradeTag dataEntity) {
+            public void convert(ViewHolder viewHolder, TradeTag dataEntity,int position) {
                 viewHolder.setText(R.id.grid_tv, dataEntity.getName());
                 viewHolder.setFrescoImg(R.id.grid_iv, Uri.parse(dataEntity.getBgPic()));
             }
