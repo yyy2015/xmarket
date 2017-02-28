@@ -112,8 +112,8 @@ public class UserController {
 
     @ApiOperation(value = "获取商品列表;根据kind的值获取不同类型列表",response = Result.class,produces = "application/json;charset=UTF-8")
     @GetMapping(value = ApiConf.get_user_trades,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> getTrades(@PathVariable("userId") String userId,@RequestParam int kind){
-        switch (kind){
+    public ResponseEntity<?> getTrades(@PathVariable("userId") String userId,@RequestParam("type") int type){
+        switch (type){
             case 0:return userService.getTrades(TradeType.TO_BE_CONFIRMED, userId);
             case 1:return userService.getTrades(TradeType.SELL,userId);
             case 2:return userService.getTrades(TradeType.BOUGHT,userId);

@@ -56,7 +56,7 @@ public class UserTradeActivity extends BaseActivity implements UserTradeView{
             case 0:textView.setText("待确认");break;
             case 1:textView.setText("待售");break;
             case 2:textView.setText("已买");break;
-            case 3:textView.setText("已卖");break;
+            case 3:textView.setText("已售");break;
             case 4:textView.setText("捐赠");break;
             default:break;
         }

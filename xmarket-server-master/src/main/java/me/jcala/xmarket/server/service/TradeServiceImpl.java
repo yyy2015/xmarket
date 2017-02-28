@@ -135,7 +135,7 @@ public class TradeServiceImpl implements TradeService {
             log.info("发布商品序列化或者图片存储出错:"+e.getMessage());
         }
         if (tradeData!=null){
-            customRepository.addToUserTrades("sell_trades",tradeData.getAuthor().getId(),tradeData.getId());
+            customRepository.addToUserTrades("sellTrades",tradeData.getAuthor().getId(),tradeData.getId());
             return RespFactory.INSTANCE().ok();
         }
         return RespFactory.INSTANCE().paramsError();

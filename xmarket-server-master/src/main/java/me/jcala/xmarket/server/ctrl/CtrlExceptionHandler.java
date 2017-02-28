@@ -17,6 +17,7 @@ class CtrlExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity exceptionHandlerProd(Exception e) {
         log.warn(e.getLocalizedMessage());
+        e.printStackTrace();
         return  RespFactory.INSTANCE().serverError();
     }
 }
