@@ -3,6 +3,8 @@ package me.jcala.xmarket.mvp.a_base;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 
 public abstract  class BaseActivity extends AppCompatActivity {
 

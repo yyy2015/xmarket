@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -52,6 +53,9 @@ public class MainActivity  extends BaseActivity
 
     @Override
     protected void initViews(Bundle savedInstanceState) {
+        //zwq add
+        Fresco.initialize(this);
+        //zwq add end
         setContentView(R.layout.main_activity);
         if (AppConf.useMock) {
             SharedPreferencesStorage.instance.saveUser(getApplicationContext(),

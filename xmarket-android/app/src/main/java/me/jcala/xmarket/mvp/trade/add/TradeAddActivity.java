@@ -125,6 +125,7 @@ public class TradeAddActivity extends BaseActivity implements TradeAddView{
         adapter=new CommonAdapter<String>(TradeAddActivity.this,picUrls,R.layout.trade_add_pic_item) {
             @Override
             public void convert(ViewHolder viewHolder, String picUrl, int position) {
+                //zwq add
                 Button deletePic = (Button) viewHolder.getConvertView().findViewById(R.id.bt_del);
                 if(position != picUrls.size()-1){
                     deletePic.setVisibility(View.VISIBLE);
@@ -144,7 +145,11 @@ public class TradeAddActivity extends BaseActivity implements TradeAddView{
 //                               .show();
                     }
                 });
+                //zwq add end
                 viewHolder.setFrescoImg(R.id.grid_iv, Uri.parse(picUrl));
+                //zwq test
+                System.out.println(TradeAddActivity.this+"AddListener, "+picUrl);
+                //zwq test end
             }
         };
         AdapterView.OnItemClickListener listener=(AdapterView<?> parent, View view, int position, long id)->{
