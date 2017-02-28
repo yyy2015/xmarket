@@ -45,6 +45,7 @@ public class TradeTagPresenterImpl implements TradeTagPresenter,TradeTagModel.on
 
     private void initList(List<TradeTag> tagList){
         BaseAdapter adapter=new CommonAdapter<TradeTag>(mContext, tagList,R.layout.sort_grid_item) {
+
             @Override
             public void convert(ViewHolder viewHolder, TradeTag dataEntity,int position) {
                 viewHolder.setText(R.id.grid_tv, dataEntity.getName());
@@ -63,6 +64,7 @@ public class TradeTagPresenterImpl implements TradeTagPresenter,TradeTagModel.on
     @Override
     public void onComplete(Result<List<TradeTag>> result,Realm realmDefault) {
         if (!resultHandler(result)){
+            System.out.println("TradeTagPresenterImpl not resultHandler 失败！");
             return;
         }
         initList(result.getData());

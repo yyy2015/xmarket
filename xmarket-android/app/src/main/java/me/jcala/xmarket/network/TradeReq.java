@@ -32,7 +32,8 @@ public interface TradeReq {
     /**
      * 获取分类名称列表请求(List<String>)
      *
-     * kind设置为2
+     * kind设置为2，代表只获取名字
+     * kind设置为1，代表获取带有图片资源的TradTag列表
      */
     @GET(ApiConf.get_tags)
     Observable<Result<List<String>>> tagNames(@Query("type") int type);

@@ -26,7 +26,7 @@ class TradeTagModelImpl implements TradeTagModel {
         ReqExecutor
                 .INSTANCE()
                 .tradeReq()
-                .tradeTags(TradeReq.GET_TAG)
+                .tradeTags(TradeReq.GET_TAG)//zwq modified(change GET_Name to GET_Tag)  未测试
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Result<List<TradeTag>>>() {
