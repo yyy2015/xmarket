@@ -16,6 +16,7 @@ import me.jcala.xmarket.server.utils.FileTool;
 import me.jcala.xmarket.server.utils.RespFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -62,7 +63,7 @@ public class TradeServiceImpl implements TradeService {
         }
 
         Result<List<Trade>> result=new Result<List<Trade>>().api(Api.SUCCESS);
-        List<Trade> trades=tradeRepository.findByTagNameAndStatus(tagName,0,page);
+        List<Trade> trades=tradeRepository.findByTagNameAndStatus(tagName,0, new Sort(Sort.Direction.DESC, "createTime"));
         result.setData(trades);
 
         return new ResponseEntity<>(result,HttpStatus.OK);
@@ -89,7 +90,7 @@ public class TradeServiceImpl implements TradeService {
         }
 
         Result<List<Trade>> result=new Result<List<Trade>>().api(Api.SUCCESS);
-        List<Trade> trades=tradeRepository.findBySchoolNameAndStatus(schoolName,0,page);
+        List<Trade> trades=tradeRepository.findBySchoolNameAndStatus(schoolName,0,new Sort(Sort.Direction.DESC, "createTime"));
         result.setData(trades);
 
         return new ResponseEntity<>(result,HttpStatus.OK);

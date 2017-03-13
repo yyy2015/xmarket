@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
-import com.orhanobut.logger.Logger;
-
 import java.util.List;
 
 import io.realm.Realm;
