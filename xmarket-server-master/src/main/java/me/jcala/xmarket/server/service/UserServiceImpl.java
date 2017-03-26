@@ -10,6 +10,7 @@ import me.jcala.xmarket.server.entity.configuration.TradeType;
 import me.jcala.xmarket.server.entity.document.*;
 import me.jcala.xmarket.server.entity.pojo.Result;
 import me.jcala.xmarket.server.repository.*;
+import me.jcala.xmarket.server.service.comparator.TradeByTimeComparator;
 import me.jcala.xmarket.server.service.inter.MessageService;
 import me.jcala.xmarket.server.service.inter.UserService;
 import me.jcala.xmarket.server.utils.CustomValidator;
@@ -18,6 +19,7 @@ import me.jcala.xmarket.server.utils.FileTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,10 +29,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -254,10 +253,12 @@ public class UserServiceImpl implements UserService {
                 break;
             default:break;
         }
-
         Result<List<Trade>> result=new Result<List<Trade>>().api(Api.SUCCESS);
         List<Trade> tradeList=new ArrayList<>();
         trades.forEach(tradeList::add);
+        //dbc add sort by time
+        tradeList.sort(new TradeByTimeComparator());
+
         result.setData(tradeList);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
