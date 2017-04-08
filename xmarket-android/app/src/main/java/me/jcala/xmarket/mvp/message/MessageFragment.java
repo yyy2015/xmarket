@@ -64,7 +64,7 @@ public class MessageFragment extends BaseFragment implements MessageView {
     @Override
     public void whenShowConfirmDialog(Message item) {
         //dbc add begin 转到一个新的activity来显示消息详细信息
-
+        //give up
 
         //dbc add end
         new MaterialDialog.Builder(getActivity())

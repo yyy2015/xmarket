@@ -79,7 +79,7 @@ public class HybridController {
 
     @ApiOperation(value = "确认交易",response = Result.class,produces = "application/json;charset=UTF-8")
     @PostMapping(value = ApiConf.confirm_deal,produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> confirmDeal(@RequestParam Message message){
+    public ResponseEntity<?> confirmDeal(@RequestParam String message){
       return hybridService.confirmDeal(message);
     }
 

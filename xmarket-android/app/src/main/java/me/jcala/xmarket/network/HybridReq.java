@@ -2,10 +2,8 @@ package me.jcala.xmarket.network;
 
 import java.util.List;
 
-import me.jcala.xmarket.network.ApiConf;
 import me.jcala.xmarket.data.dto.MsgDto;
 import me.jcala.xmarket.data.dto.Result;
-import me.jcala.xmarket.data.pojo.Message;
 import me.jcala.xmarket.data.pojo.Team;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -63,7 +61,7 @@ public interface HybridReq {
     @POST(ApiConf.confirm_deal)
     @FormUrlEncoded
     Observable<Result<MsgDto>> confirmDeal(
-            @Path("messageId")  String messageId,
-            @Field("message") Message message
+//            @Path("messageId")  String messageId,
+            @Field("message") String message
     );
 }

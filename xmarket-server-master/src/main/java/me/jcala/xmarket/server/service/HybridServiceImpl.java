@@ -163,6 +163,7 @@ public class HybridServiceImpl implements HybridService{
         message.setKind(1);
         message.setUsername(fromName);
         message.setUserAvatar(fromAvatar);
+        message.setUpdateTime(System.currentTimeMillis());
         messageRepository.save(message);
         return RespFactory.INSTANCE().ok();
     }
@@ -184,10 +185,17 @@ public class HybridServiceImpl implements HybridService{
     }
 
     @Override
-    public ResponseEntity<?> confirmDeal(Message message) {
+    public ResponseEntity<?> confirmDeal(String messageJSON) {
 
-        if (!CustomValidator.checkConfirmMessage(message)){
-            return RespFactory.INSTANCE().paramsError();
+//        if (!CustomValidator.checkConfirmMessage(message)){
+//            return RespFactory.INSTANCE().paramsError();
+//        }
+        ObjectMapper mapper = new ObjectMapper();
+        Message message = null;
+        try {
+            message = mapper.readValue(messageJSON, Message.class);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         String reqMsgId=message.getReqMsgId();
@@ -195,7 +203,9 @@ public class HybridServiceImpl implements HybridService{
         if (reqMsg==null){
             return RespFactory.INSTANCE().paramsError();
         }
-        reqMsg.setKind(0);
+        reqMsg.setUpdateTime(System.currentTimeMillis());
+        message.setUpdateTime(System.currentTimeMillis());
+        reqMsg.setKind(2);
         String tradeId=message.getTradeId();
         customRepository.deleteFromUserTrades("sellTrades",message.getUserId(),tradeId);
         customRepository.addToUserTrades("soldTrades",message.getUserId(),tradeId);
