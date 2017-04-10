@@ -3,7 +3,6 @@ package me.jcala.xmarket.data.pojo;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -25,6 +24,7 @@ public class Message extends RealmObject{
     private String tradeId;//商品id
     private String tradeImg;//商品的封面
     private int kind;//kind表示信息类型。0表示买到商品的消息;1表示收到购买请求的消息;2表示已确认(交易完成)；3表示自己的志愿队收到捐赠商品
+    private long updateTime;
 
     public Message() {
     }

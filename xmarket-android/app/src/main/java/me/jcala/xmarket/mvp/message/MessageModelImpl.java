@@ -1,5 +1,7 @@
 package me.jcala.xmarket.mvp.message;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import io.realm.Realm;
@@ -22,11 +24,13 @@ public class MessageModelImpl implements MessageModel{
         if (AppConf.useMock){
             return;
         }
+        String json = new Gson().toJson(newMsg);
         Result<MsgDto> result = new Result<MsgDto>().api(Api.SERVER_ERROR);
         ReqExecutor
                 .INSTANCE()
                 .hybridReq()
-                .confirmDeal(newMsg.getId(),newMsg)
+//                .confirmDeal(newMsg.getId(),newMsg)
+                .confirmDeal(json)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Result<MsgDto>>() {

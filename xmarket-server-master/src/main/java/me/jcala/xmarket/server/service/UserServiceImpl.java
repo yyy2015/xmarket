@@ -269,9 +269,9 @@ public class UserServiceImpl implements UserService {
         if (msgNum >= num){
             return new ResponseEntity<>(new Result<String>().api(Api.USER_MSG_LATEST),HttpStatus.OK);
         }
-        Page<Message> messagePage= messageRepository.findByBelongId(userId,page);
+        List<Message> messageList= messageRepository.findByBelongId(userId, new Sort(Sort.Direction.DESC, "updateTime"));
         Result<List<Message>> result=new Result<List<Message>>().api(Api.SUCCESS);
-        result.setData(messagePage.getContent());
+        result.setData(messageList);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
@@ -303,6 +303,7 @@ public class UserServiceImpl implements UserService {
         message.setUserPhone(user.getPhone());
         message.setTradeId(tradeId);
         message.setTradeImg(tradeImg);
+        message.setUpdateTime(System.currentTimeMillis());
         messageRepository.save(message);
         messageService.pushMessage(user.getId(),"商品已经捐赠");
         return RespFactory.INSTANCE().ok();
