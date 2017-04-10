@@ -163,8 +163,8 @@ public class TradeDetailActivity extends BaseActivity implements TradeDetailView
 
     @OnClick(R.id.trade_detail_toolbar_back)
     void clickBack(){
-        Intent intent=new Intent(TradeDetailActivity.this, MainActivity.class);
-        startActivity(intent);
+//        Intent intent=new Intent(TradeDetailActivity.this, MainActivity.class);
+//        startActivity(intent);
         finish();
     }
 
