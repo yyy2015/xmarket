@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.jcala.xmarket.R;
 import me.jcala.xmarket.mvp.a_base.BaseActivity;
+import me.jcala.xmarket.mvp.main.MainActivity;
 import me.jcala.xmarket.mvp.user.login.LoginRegisterActivity;
 
 /**

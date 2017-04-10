@@ -49,8 +49,8 @@ public class RegisterPhonePresenterImpl implements RegisterPhonePresenter,
         if (result == null) return;
         switch (result.getCode()) {
             case 100:
-                User user = (User) result.getData();
-                SharedPreferencesStorage.instance.saveUser(context,user);
+//                User user = (User) result.getData();
+//                SharedPreferencesStorage.instance.saveUser(context,user);
                 registerPhoneView.whenRegisterSuccess();
                 break;
             case 207:
