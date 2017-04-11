@@ -114,7 +114,7 @@ public class RegisterNextActivity extends BaseActivity implements RegisterNextVi
 //        startActivity(intent);
 //        finish();
         Intent intent = new Intent();
-        intent.setClass(getApplicationContext(), MainActivity.class);
+        intent.setClass(getApplicationContext(), RegisterPhoneActivity.class);
         intent.putExtra("userId",userId);
         startActivity(intent);
         finish();

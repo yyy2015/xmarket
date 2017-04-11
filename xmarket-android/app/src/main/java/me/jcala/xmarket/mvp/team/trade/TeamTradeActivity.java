@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import me.jcala.xmarket.R;
 import me.jcala.xmarket.mvp.a_base.BaseActivity;
@@ -47,6 +48,14 @@ public class TeamTradeActivity extends BaseActivity implements TeamTradeView{
     @Override
     public void whenLoadDataSuc(RecyclerCommonAdapter<?> adapter) {
        recyclerView.setAdapter(adapter);
+    }
+
+    /**
+     * added by yyy 2017.04.10
+     */
+    @OnClick(R.id.team_trade_back)
+    void clickBack(){
+        finish();
     }
 
     @Override

@@ -61,7 +61,7 @@ public interface UserReq {
 
     @POST(ApiConf.register_phone)
     @FormUrlEncoded
-    Observable<Result<String>> sendMsg(@Field("phoneNum") String phoneNum);
+    Observable<Result<String>> sendMsg(@Field("userId") String userId,@Field("phoneNum") String phoneNum);
 
     @POST(ApiConf.register_phone_verify)
     @FormUrlEncoded

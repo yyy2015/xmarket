@@ -3,6 +3,8 @@ package me.jcala.xmarket.mvp.user.login.register.next;
 import java.util.List;
 
 import me.jcala.xmarket.AppConf;
+import me.jcala.xmarket.app.App;
+import me.jcala.xmarket.data.storage.SharedPreferencesStorage;
 import me.jcala.xmarket.network.Api;
 import me.jcala.xmarket.network.ReqExecutor;
 import me.jcala.xmarket.data.dto.Result;
@@ -58,6 +60,25 @@ public class RegisterNextModelImpl implements RegisterNextModel{
         }
 
         Result<User> result= new Result<User>().api(Api.SERVER_ERROR);
+        ReqExecutor
+                .INSTANCE()
+                .userReq()
+                .sendMsg(userId,phone)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<Result<String>>() {
+//                    @Override
+//                    public void onCompleted() {
+//                    }
+//                    @Override
+//                    public void onError(Throwable e) {
+//                    }
+//                    @Override
+//                    public void onNext(Result<String> stringResult) {
+//                        SharedPreferencesStorage.instance.saveCode(App.getInstance().getApplicationContext(),stringResult.getData());
+//                    }
+//                })
+        ;
         ReqExecutor
                 .INSTANCE()
                 .userReq()

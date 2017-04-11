@@ -46,6 +46,20 @@ public class SharedPreferencesStorage {
         editor.apply();
     }
 
+    public void saveCode(final Context context, final String code){
+        SharedPreferences sp = context.getSharedPreferences("code", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        if (code!=null){
+            editor.putString("code",code);
+        }
+        editor.apply();
+    }
+
+    public String getSCode(final Context context){
+        SharedPreferences sp = context.getSharedPreferences("code", MODE_PRIVATE);
+        return sp.getString("code","");
+    }
+
      void clear(final Context context){
         SharedPreferences sp = context.getSharedPreferences(SP,MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();

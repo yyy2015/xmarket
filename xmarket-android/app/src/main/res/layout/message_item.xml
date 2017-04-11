@@ -10,7 +10,7 @@
         android:id="@+id/message_kind_bg"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_large"
-        android:background="@color/md_green_300">
+        android:background="@color/new_green_1">
 
         <TextView
             android:id="@+id/message_kind_title"

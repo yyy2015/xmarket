@@ -316,4 +316,10 @@
     <color name="md_blue_grey_800">#37474f</color>
     <color name="md_blue_grey_900">#263238</color>
 
+    <!--new colors-->
+    <color name="new_pink_1">#ffa7a5</color>
+    <color name="new_green_1">#8dccad</color>
+    <color name="new_yellow_1">#f9b25a</color>
+
+
 </resources>
