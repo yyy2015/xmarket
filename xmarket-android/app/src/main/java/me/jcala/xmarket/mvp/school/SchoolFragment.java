@@ -51,7 +51,7 @@ public class SchoolFragment extends BaseFragment implements SchoolView{
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light,
                 android.R.color.holo_orange_light, android.R.color.holo_green_light);
-
+/*
         //zwq add
         SwipeRefreshLayout.OnRefreshListener listener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -60,11 +60,12 @@ public class SchoolFragment extends BaseFragment implements SchoolView{
             }
         };
         //zwq add end
-
+*/
         //zwq modified（()->presenter.refreshView(realm));
-        refreshLayout.setOnRefreshListener(listener);
+        refreshLayout.setOnRefreshListener(()->presenter.refreshView(realm));
+//        refreshLayout.setOnRefreshListener(listener);
         //zwq modified end
-
+/*
         //zwq add
         refreshLayout.post(new Runnable(){
             @Override
@@ -74,8 +75,9 @@ public class SchoolFragment extends BaseFragment implements SchoolView{
         });
         listener.onRefresh();
         //zwq add end
-
+*/
         presenter.initView(realm);
+        presenter.refreshView(realm);
     }
 
     @Override
