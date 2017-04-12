@@ -214,7 +214,7 @@ public class HybridServiceImpl implements HybridService{
         customRepository.updateTradeStatus(tradeId,1);
         messageRepository.save(reqMsg);
         messageRepository.save(message);
-        messageService.pushMessage(message.getUserId(),"交易已确认");
+        messageService.pushMessage(message.getBelongId(),"交易已确认");
         return RespFactory.INSTANCE().ok();
     }
 }

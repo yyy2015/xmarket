@@ -71,8 +71,7 @@ public class PhoneController  {
         if (codeInSession!=null && codeInSession.equals(code)) {
             return userService.updatePhone(userId, (String) session.getAttribute("phone"));
         }
-        Result<String> errStr = new Result<String>().api(me.jcala.xmarket.server.entity.configuration.Api.USER_PHONE_ERR);
-        return new ResponseEntity<Object>(errStr,HttpStatus.OK);
+        return RespFactory.INSTANCE().ok();
     }
 
 }

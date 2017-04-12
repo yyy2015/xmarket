@@ -166,7 +166,7 @@ public class UserServiceImpl implements UserService {
         customRepository.updateUserPhoneSchool(id,phone,school);
         Result<User> userResult=new Result<User>().api(Api.SUCCESS);
         user.setSchool(school);
-//        user.setPhone(phone);
+        user.setPhone(phone);
         userResult.setData(user);
         return new ResponseEntity<>(userResult,HttpStatus.OK);
     }
