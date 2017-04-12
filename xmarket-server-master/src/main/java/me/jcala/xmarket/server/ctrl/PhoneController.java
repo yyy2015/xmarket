@@ -66,11 +66,11 @@ public class PhoneController  {
     public ResponseEntity<?> verifyMessage(@RequestParam String code,
                                            @RequestParam String userId,
                                            HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String codeInSession = (String) session.getAttribute("code");
-        if (codeInSession!=null && codeInSession.equals(code)) {
-            return userService.updatePhone(userId, (String) session.getAttribute("phone"));
-        }
+//        HttpSession session = request.getSession();
+//        String codeInSession = (String) session.getAttribute("code");
+//        if (codeInSession!=null && codeInSession.equals(code)) {
+//            return userService.updatePhone(userId, (String) session.getAttribute("phone"));
+//        }
         return RespFactory.INSTANCE().ok();
     }
 
